@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        <div>{{test.value}}</div>
+        <input v-model="test.value" type="text">
+    </div>
+
+    
+    <script type="module">
+        import MiniVue from '../index.js'
+
+        const { createApp, ref, reactive, resolveComponent } = MiniVue;
+        
+        MiniVue.createApp({
+            setup() {
+                const test = ref('hello world')
+                
+        return {
+            test,
+        }
+    },
+}).mount('#demo')
+    </script>
+</body>
+</html>

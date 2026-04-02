@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">Press F12 to check console of effect trigger</div>
+
+    <script type="module">
+        import MiniVue from '../index.js';
+        const { reactive, effect, createApp } = MiniVue;
+        
+        const observer = (window.observer = reactive({
+            count: 0,
+            countOne:1,
+            countTwo:2,
+        }))
+
+        // 收集依赖
+        effect(() => {
+            console.log(observer.count);
+        })
+
+        effect(() => {
+            // 当使用CountOne++时，应触发countOne的effect和countTwo的effect
+            console.log(observer.countOne);
+            effect(() => {
+                // 当在控制台更新countTwo++时，应只触发countTwo的effect 而不是连同外层的effect一同触发
+                console.log(observer.countTwo);
+            })
+        })
+
+    </script>
+</body>
+</html

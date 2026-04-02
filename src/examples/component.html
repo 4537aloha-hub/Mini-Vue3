@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+        <divf />
+    </div>
+    <script type="module">
+        import MiniVue from '../index.js';
+        const { createApp, ref, reactive, resolveComponent } = MiniVue;
+        createApp({
+            setup() {
+                const divf = resolveComponent("divf");
+
+                return {
+                        divf,
+                    }
+                }
+        }).mount('#demo');
+        const divf = document.querySelector("divf");
+        divf.innerHTML = "Hello MiniVue 3!";
+        console.log(divf);
+    </script>
+</body>
+</html>

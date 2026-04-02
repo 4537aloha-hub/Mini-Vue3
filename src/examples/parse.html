@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>Press F12 to check the console of ast.</div>
+    <div id="demo"></div>
+
+    <script type="module">
+        import MiniVue from "../index.js";
+        const { createApp, parse } = MiniVue;
+        
+        const app = createApp({
+            setup() {
+                 const ast = parse(`<div id="foo" v-if="ok">hello {{name}}</div>`);
+                 console.log(ast);
+                 return {
+                     ast,
+                 }
+            }, 
+        }).mount('#demo');
+    </script>
+</body>
+</html>

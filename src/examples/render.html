@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import MiniVue from '../index.js'
+        const { createApp, ref, h, render,Fragment,Text } = MiniVue;
+
+        const vnode= h('div', {
+            class: 'demo',
+            style: {
+                border: '1px solid',
+                fontSize: '20px',
+            },
+            onClick: () => console.log('click'),
+            id: 'foo',
+            checked:'',
+            custom: false,
+        },
+        [
+            h('ul', null, [
+                h('li', { style: { color: 'red' } }, '1'),
+                h('li', null, '2'),
+                h('li', { style: { color: 'blue' } }, '3'),
+                h(Fragment, null, [
+                    h('li', null, '4'),
+                    h('li'),
+                ]),
+                h('li', null, [h(Text, null, 'hello world')])
+            ])
+        ]
+    )
+
+    render(vnode, document.body)
+    </script>
+</body>
+</html>

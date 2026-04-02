@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script type="module">
+        import MiniVue from '../index.js'
+        const { createApp, ref, h, render, } = MiniVue;
+
+        
+        const Comp = {
+        setup() {
+            const count = ref(0);
+            const add = () => {
+                // 消息队列确保了不会因为count值的3次更新，而导致count.value被重复更新3次 而是1次
+                count.value++;
+                count.value++;
+                count.value++;
+                console.log(count.value);
+            };
+            return {
+                count,
+                add,
+            };
+        },
+        render(ctx) {
+            console.log('render');
+            return [
+                h('div', null, ctx.count.value),
+                h('button', { onClick: ctx.add }, 'add'),
+            ]
+        }
+    }    
+    const vnode = h(Comp);
+    render(vnode, document.body);
+</script>
+</body>
+</html>

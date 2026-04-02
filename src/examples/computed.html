@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">
+       <p> Press F12 to check console of num.value and c.value </p>
+        <p>you must test manually num.value and c.value</p>
+        <p>you can enter num.value = 100 to test c.value on console</p>
+
+        <div> count:  {{count.value}}</div>
+        <div> doubleCount: {{doubleCount.value}}</div>
+    </div>
+
+    <script type="module">
+        import MiniVue from '../index.js';
+        const {reactive, computed, createApp, ref} = MiniVue;
+
+        createApp({
+            setup() {
+                const count = ref(10);
+                const doubleCount = computed(() => count.value * 2);
+
+                // 测试computed get与set方法 
+                const num = (window.num  = ref(0))
+                const c =  (window.c = computed({
+                    get() {
+                        console.log('get');
+                        return num.value++
+                    },
+                    set(val) {
+                        num.value = val
+                    }
+                }))
+
+                return {
+                    count,
+                    doubleCount,
+                }
+            }
+        }).mount('#demo')
+    </script>
+</body>
+</html>
